@@ -213,7 +213,7 @@ abstract class ApiClient
 
         $errorMessage = "";
 
-        $responseArr = json_decode(json_encode($response), false);
+        $responseArr = json_decode(json_encode($response), true);
 
         $errorMessage = $response->message;
 
