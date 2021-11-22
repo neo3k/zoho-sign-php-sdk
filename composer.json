@@ -1,6 +1,6 @@
 {
 	"name": "veraandco/zoho-sign-php-sdk",
-	"description": "Zoho Sign's v1 api wrapper SDK in PHP",
+	"description": "Zoho Sign v1 API PHP Wrapper - PHP 7.4 Ready",
 	"type": "library",
 	"keywords": ["Zoho","Sign","Digital Signature", "Zoho Sign SDK", "Zoho Sign PHP SDK", "Zoho Sign PHP examples"],
 	"homepage": "https://zoho.com.sign",
