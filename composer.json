@@ -1,0 +1,34 @@
+{
+	"name": "veraandco/zoho-sign-php-sdk",
+	"description": "Zoho Sign's v1 api wrapper SDK in PHP",
+	"type": "library",
+	"keywords": ["Zoho","Sign","Digital Signature", "Zoho Sign SDK", "Zoho Sign PHP SDK", "Zoho Sign PHP examples"],
+	"homepage": "https://zoho.com.sign",
+	"readme":"./README.md",
+	"authors": [
+		{
+			"name": "Boris Vera",
+			"email": "boris@wearevera.com",
+			"homepage": "http://veraand.co",
+			"role": "Developer"
+		},
+		{
+			"name": "Zoho Sign",
+			"email": "sign@zohocorp.com",
+			"homepage": "http://zoho.com/sign",
+			"role": "Developer"
+		}
+	],
+	"support":{
+		"email":"support@zohosign.com",
+		"docs": "https://www.zoho.com/sign/api/"
+	},
+	"require" : {
+		"php" : ">=7.4"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Vera\\ZohoSign\\" : "src/"
+		}
+	}
+}
