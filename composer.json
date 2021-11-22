@@ -28,7 +28,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Vera\\ZohoSign\\" : "src/"
+			"Vera\\ZohoSign\\" : "src"
 		}
 	}
 }

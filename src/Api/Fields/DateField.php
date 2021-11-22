@@ -1,12 +1,10 @@
 <?php
 
-namespace Vera\ZohoSign\api\fields;
+namespace Vera\ZohoSign\Api\Fields;
 
+use Vera\ZohoSign\Api\Fields\TextProperty;
 
-use Vera\ZohoSign\api\fields\DropdownValues;
-use Vera\ZohoSign\api\fields\TextProperty;
-
-class DropdownField
+class DateField
 { 
 	private $field_id; 
 	private $x_coord; 
@@ -14,7 +12,6 @@ class DropdownField
 	private $field_type_name; 
 	private $abs_height; 
 	private $text_property; // Object of class text_property 
-	private $dropdown_values = array(); // Array of class dropdown_values 
 	private $field_category; 
 	private $field_label; 
 	private $is_mandatory; 
@@ -26,12 +23,14 @@ class DropdownField
 	private $action_id; 
 	private $width; 
 	private $y_coord; 
+	private $date_format; 
 	private $description_tooltip; 
 	private $x_value; 
-	private $height; 
-	
-	const DROPDOWN 	 = "Dropdown";
+	private $height;
 
+	const SIGNDATE 	 = "Date";
+	const CUSTOMDATE = "CustomDate";
+	 
 	function __construct($response=null)
 	{
 
@@ -41,16 +40,9 @@ class DropdownField
 		$this->field_id= (isset($response["field_id"])) ? $response["field_id"] : null;
 		$this->x_coord= (isset($response["x_coord"])) ? $response["x_coord"] : null;
 		$this->field_type_id= (isset($response["field_type_id"])) ? $response["field_type_id"] : null;
-		$this->field_type_name= (isset($response["field_type_name"])) ? $response["field_type_name"] : self::DROPDOWN;
+		$this->field_type_name= (isset($response["field_type_name"])) ? $response["field_type_name"] : null;
 		$this->abs_height= (isset($response["abs_height"])) ? $response["abs_height"] : null;
 		$this->text_property= (isset($response["text_property"])) ? new TextProperty($response["text_property"]) : null ;
-		$this->dropdown_values= array();
-		if( isset($response["dropdown_values"]) ){
-			foreach($response["dropdown_values"] as $obj)
-			{
-				array_push($this->dropdown_values,new DropdownValues($obj));
-			}	
-		}
 		$this->field_category= (isset($response["field_category"])) ? $response["field_category"] : null;
 		$this->field_label= (isset($response["field_label"])) ? $response["field_label"] : null;
 		$this->is_mandatory= (isset($response["is_mandatory"])) ? $response["is_mandatory"] : null;
@@ -62,6 +54,7 @@ class DropdownField
 		$this->action_id= (isset($response["action_id"])) ? $response["action_id"] : null;
 		$this->width= (isset($response["width"])) ? $response["width"] : null;
 		$this->y_coord= (isset($response["y_coord"])) ? $response["y_coord"] : null;
+		$this->date_format= (isset($response["date_format"])) ? $response["date_format"] : null;
 		$this->description_tooltip= (isset($response["description_tooltip"])) ? $response["description_tooltip"] : null;
 		$this->x_value= (isset($response["x_value"])) ? $response["x_value"] : null;
 		$this->height= (isset($response["height"])) ? $response["height"] : null;
@@ -88,13 +81,6 @@ class DropdownField
  
 	public function getTextProperty(){
 		return $this->text_property;
-	} 
- 
-	public function getDropdownValues(){
-		// if( is_null( $this->dropdown_values ) ){
-		// 	return array();
-		// }
-		return $this->dropdown_values;
 	} 
  
 	public function getFieldCategory(){
@@ -141,6 +127,10 @@ class DropdownField
 		return $this->y_coord;
 	} 
  
+	public function getDateFormat(){
+		return $this->date_format;
+	} 
+ 
 	public function getDescriptionTooltip(){
 		return $this->description_tooltip;
 	} 
@@ -152,7 +142,7 @@ class DropdownField
 	public function getHeight(){
 		return $this->height;
 	} 
-  
+ 
 	public function setFieldId($field_id){
 		$this->field_id=$field_id;
 	} 
@@ -175,14 +165,6 @@ class DropdownField
  
 	public function setTextProperty($text_property){
 		$this->text_property=$text_property;
-	} 
- 
-	public function addDropdownValues($dropdown_values){
-		array_push($this->dropdown_values,$dropdown_values);
-	} 
-
-	public function setDropdownValues($dropdown_values){
-		$this->dropdown_values = $dropdown_values;
 	} 
  
 	public function setFieldCategory($field_category){
@@ -229,6 +211,10 @@ class DropdownField
 		$this->y_coord=$y_coord;
 	} 
  
+	public function setDateFormat($date_format){
+		$this->date_format=$date_format;
+	} 
+ 
 	public function setDescriptionTooltip($description_tooltip){
 		$this->description_tooltip=$description_tooltip;
 	} 
@@ -249,12 +235,6 @@ class DropdownField
 		$response["field_type_name"]=$this->field_type_name;
 		$response["abs_height"]=$this->abs_height;
 		$response["text_property"]= isset($this->text_property) ? $this->text_property->constructJson() : null;
-		$dropdown_valuesArr = array();
-		foreach($this->dropdown_values as $obj)
-		{
-			array_push($dropdown_valuesArr,$obj->constructJson());
-		}
-		$response["dropdown_values"]= count($dropdown_valuesArr)!=0 ? $dropdown_valuesArr : NULL ;
 		$response["field_category"]=$this->field_category;
 		$response["field_label"]=$this->field_label;
 		$response["is_mandatory"]=$this->is_mandatory;
@@ -266,6 +246,7 @@ class DropdownField
 		$response["action_id"]=$this->action_id;
 		$response["width"]=$this->width;
 		$response["y_coord"]=$this->y_coord;
+		$response["date_format"]=$this->date_format;
 		$response["description_tooltip"]=$this->description_tooltip;
 		$response["x_value"]=$this->x_value;
 		$response["height"]=$this->height;

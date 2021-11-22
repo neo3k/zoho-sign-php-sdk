@@ -1,37 +1,39 @@
 <?php
 
-namespace Vera\ZohoSign\api\fields;
+namespace Vera\ZohoSign\Api\Fields;
 
-class CheckBox
+use Vera\ZohoSign\Api\Fields\TextProperty;
+
+class TextField
 { 
+	const TEXTFIELD = "Textfield";
+	const EMAIL 	= "Email";
+	const NAME 		= "Name";
+	const COMPANY 	= "Company";
+	const JOBTITLE 	= "Jobtitle";
+
 	private $field_id; 
-	private $field_name; 
-	private $field_label; 
+	private $x_coord; 
 	private $field_type_id; 
 	private $field_type_name; 
-
-	private $document_id; 
-	private $action_id; 
-	private $field_category;
-	private $is_mandatory; 
-
-	private $x_coord;
-	private $y_coord; 
-	private $x_value; 
-	private $y_value; 
 	private $abs_height; 
-	private $abs_width; 
-	private $height; 
-	private $width; 
-
+	private $text_property; // Object of class text_property 
+	private $field_category; 
+	private $field_label; 
+	private $name_format; 
+	private $is_mandatory; 
 	private $default_value; 
 	private $page_no; 
-
-	private $is_read_only; 
+	private $document_id; 
+	private $field_name; 
+	private $y_value; 
+	private $abs_width; 
+	private $action_id; 
+	private $width; 
+	private $y_coord; 
 	private $description_tooltip; 
-
-	const CHECKBOX 	 = "Checkbox";
-
+	private $x_value; 
+	private $height; 
 	function __construct($response=null)
 	{
 
@@ -42,10 +44,12 @@ class CheckBox
 		$this->field_id= (isset($response["field_id"])) ? $response["field_id"] : null;
 		$this->x_coord= (isset($response["x_coord"])) ? $response["x_coord"] : null;
 		$this->field_type_id= (isset($response["field_type_id"])) ? $response["field_type_id"] : null;
-		$this->field_type_name= (isset($response["field_type_name"])) ? $response["field_type_name"] : self::CHECKBOX;
+		$this->field_type_name= (isset($response["field_type_name"])) ? $response["field_type_name"] : null;
 		$this->abs_height= (isset($response["abs_height"])) ? $response["abs_height"] : null;
+		$this->text_property= (isset($response["text_property"])) ? new TextProperty($response["text_property"]) : null ;
 		$this->field_category= (isset($response["field_category"])) ? $response["field_category"] : null;
 		$this->field_label= (isset($response["field_label"])) ? $response["field_label"] : null;
+		$this->name_format= (isset($response["name_format"])) ? $response["name_format"] : null;
 		$this->is_mandatory= (isset($response["is_mandatory"])) ? $response["is_mandatory"] : null;
 		$this->default_value= (isset($response["default_value"])) ? $response["default_value"] : null;
 		$this->page_no= (isset($response["page_no"])) ? $response["page_no"] : null;
@@ -56,7 +60,6 @@ class CheckBox
 		$this->action_id= (isset($response["action_id"])) ? $response["action_id"] : null;
 		$this->width= (isset($response["width"])) ? $response["width"] : null;
 		$this->y_coord= (isset($response["y_coord"])) ? $response["y_coord"] : null;
-		$this->is_read_only= (isset($response["is_read_only"])) ? $response["is_read_only"] : null;
 		$this->description_tooltip= (isset($response["description_tooltip"])) ? $response["description_tooltip"] : null;
 		$this->x_value= (isset($response["x_value"])) ? $response["x_value"] : null;
 		$this->height= (isset($response["height"])) ? $response["height"] : null;
@@ -81,12 +84,23 @@ class CheckBox
 		return $this->abs_height;
 	} 
  
+	public function getTextProperty(){
+		// if( is_null($this->text_property) ){
+		// 	return new TextProperty)();
+		// }
+		return $this->text_property;
+	} 
+ 
 	public function getFieldCategory(){
 		return $this->field_category;
 	} 
  
 	public function getFieldLabel(){
 		return $this->field_label;
+	} 
+ 
+	public function getNameFormat(){
+		return $this->name_format;
 	} 
  
 	public function getIsMandatory(){
@@ -129,10 +143,6 @@ class CheckBox
 		return $this->y_coord;
 	} 
  
-	public function getIsReadOnly(){
-		return $this->is_read_only;
-	} 
- 
 	public function getDescriptionTooltip(){
 		return $this->description_tooltip;
 	} 
@@ -144,9 +154,9 @@ class CheckBox
 	public function getHeight(){
 		return $this->height;
 	} 
- 
+
 	public function setFieldId($field_id){
-		$this->field_id=$wfield_id;
+		$this->field_id=$field_id;
 	} 
  
 	public function setX_coord($x_coord){
@@ -156,7 +166,7 @@ class CheckBox
 	public function setFieldTypeId($field_type_id){
 		$this->field_type_id=$field_type_id;
 	} 
- 
+
 	public function setFieldTypeName($field_type_name){
 		$this->field_type_name=$field_type_name;
 	} 
@@ -165,12 +175,20 @@ class CheckBox
 		$this->abs_height=$abs_height;
 	} 
  
+	public function setTextProperty($text_property){
+		$this->text_property=$text_property;
+	} 
+ 
 	public function setFieldCategory($field_category){
 		$this->field_category=$field_category;
 	} 
  
 	public function setFieldLabel($field_label){
 		$this->field_label=$field_label;
+	} 
+ 
+	public function setNameFormat($name_format){
+		$this->name_format=$name_format;
 	} 
  
 	public function setIsMandatory($is_mandatory){
@@ -213,10 +231,6 @@ class CheckBox
 		$this->y_coord=$y_coord;
 	} 
  
-	public function setIsReadOnly($is_read_only){
-		$this->is_read_only=$is_read_only;
-	} 
- 
 	public function setDescriptionTooltip($description_tooltip){
 		$this->description_tooltip=$description_tooltip;
 	} 
@@ -229,7 +243,6 @@ class CheckBox
 		$this->height=$height;
 	} 
  
- 
 	public function constructJson()
 	{
 		$response["field_id"]=$this->field_id;
@@ -237,8 +250,10 @@ class CheckBox
 		$response["field_type_id"]=$this->field_type_id;
 		$response["field_type_name"]=$this->field_type_name;
 		$response["abs_height"]=$this->abs_height;
+		$response["text_property"]= isset( $this->text_property ) ?  $this->text_property->constructJson() : NULL;
 		$response["field_category"]=$this->field_category;
 		$response["field_label"]=$this->field_label;
+		$response["name_format"]=$this->name_format;
 		$response["is_mandatory"]=$this->is_mandatory;
 		$response["default_value"]=$this->default_value;
 		$response["page_no"]=$this->page_no;
@@ -249,7 +264,6 @@ class CheckBox
 		$response["action_id"]=$this->action_id;
 		$response["width"]=$this->width;
 		$response["y_coord"]=$this->y_coord;
-		$response["is_read_only"]=$this->is_read_only;
 		$response["description_tooltip"]=$this->description_tooltip;
 		$response["x_value"]=$this->x_value;
 		$response["height"]=$this->height;

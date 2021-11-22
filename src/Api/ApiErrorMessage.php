@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vera\ZohoSign\api;
+namespace Vera\ZohoSign\Api;
 
 class ApiErrorMessage
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Vera\ZohoSign\api;
+namespace Vera\ZohoSign\Api;
 
 class Documents
 { 

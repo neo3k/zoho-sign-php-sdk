@@ -1,9 +1,9 @@
 <?php
 
-namespace Vera\ZohoSign\api;
+namespace Vera\ZohoSign\Api;
 
-use Vera\ZohoSign\api\Actions;
-use Vera\ZohoSign\api\Documents;
+use Vera\ZohoSign\Api\Actions;
+use Vera\ZohoSign\Api\Documents;
 
 class RequestObject
 { 

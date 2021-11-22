@@ -1,28 +1,17 @@
 <?php
 
-namespace Vera\ZohoSign\api\fields;
+namespace Vera\ZohoSign\Api\Fields;
 
-use Vera\ZohoSign\api\fields\TextProperty;
-
-class TextField
+class AttachmentField
 { 
-	const TEXTFIELD = "Textfield";
-	const EMAIL 	= "Email";
-	const NAME 		= "Name";
-	const COMPANY 	= "Company";
-	const JOBTITLE 	= "Jobtitle";
-
 	private $field_id; 
 	private $x_coord; 
 	private $field_type_id; 
 	private $field_type_name; 
 	private $abs_height; 
-	private $text_property; // Object of class text_property 
 	private $field_category; 
 	private $field_label; 
-	private $name_format; 
 	private $is_mandatory; 
-	private $default_value; 
 	private $page_no; 
 	private $document_id; 
 	private $field_name; 
@@ -34,6 +23,9 @@ class TextField
 	private $description_tooltip; 
 	private $x_value; 
 	private $height; 
+
+	const ATTACHMENT = "Attachment";
+	
 	function __construct($response=null)
 	{
 
@@ -44,14 +36,11 @@ class TextField
 		$this->field_id= (isset($response["field_id"])) ? $response["field_id"] : null;
 		$this->x_coord= (isset($response["x_coord"])) ? $response["x_coord"] : null;
 		$this->field_type_id= (isset($response["field_type_id"])) ? $response["field_type_id"] : null;
-		$this->field_type_name= (isset($response["field_type_name"])) ? $response["field_type_name"] : null;
+		$this->field_type_name= (isset($response["field_type_name"])) ? $response["field_type_name"] : self::ATTACHMENT;
 		$this->abs_height= (isset($response["abs_height"])) ? $response["abs_height"] : null;
-		$this->text_property= (isset($response["text_property"])) ? new TextProperty($response["text_property"]) : null ;
 		$this->field_category= (isset($response["field_category"])) ? $response["field_category"] : null;
 		$this->field_label= (isset($response["field_label"])) ? $response["field_label"] : null;
-		$this->name_format= (isset($response["name_format"])) ? $response["name_format"] : null;
 		$this->is_mandatory= (isset($response["is_mandatory"])) ? $response["is_mandatory"] : null;
-		$this->default_value= (isset($response["default_value"])) ? $response["default_value"] : null;
 		$this->page_no= (isset($response["page_no"])) ? $response["page_no"] : null;
 		$this->document_id= (isset($response["document_id"])) ? $response["document_id"] : null;
 		$this->field_name= (isset($response["field_name"])) ? $response["field_name"] : null;
@@ -75,20 +64,13 @@ class TextField
 	public function getFieldTypeId(){
 		return $this->field_type_id;
 	} 
-
+ 
 	public function getFieldTypeName(){
 		return $this->field_type_name;
 	} 
  
 	public function getAbsHeight(){
 		return $this->abs_height;
-	} 
- 
-	public function getTextProperty(){
-		// if( is_null($this->text_property) ){
-		// 	return new TextProperty)();
-		// }
-		return $this->text_property;
 	} 
  
 	public function getFieldCategory(){
@@ -99,16 +81,8 @@ class TextField
 		return $this->field_label;
 	} 
  
-	public function getNameFormat(){
-		return $this->name_format;
-	} 
- 
 	public function getIsMandatory(){
 		return $this->is_mandatory;
-	} 
- 
-	public function getDefaultValue(){
-		return $this->default_value;
 	} 
  
 	public function getPageNum(){
@@ -154,7 +128,7 @@ class TextField
 	public function getHeight(){
 		return $this->height;
 	} 
-
+ 
 	public function setFieldId($field_id){
 		$this->field_id=$field_id;
 	} 
@@ -166,17 +140,13 @@ class TextField
 	public function setFieldTypeId($field_type_id){
 		$this->field_type_id=$field_type_id;
 	} 
-
+ 
 	public function setFieldTypeName($field_type_name){
 		$this->field_type_name=$field_type_name;
 	} 
  
 	public function setAbsHeight($abs_height){
 		$this->abs_height=$abs_height;
-	} 
- 
-	public function setTextProperty($text_property){
-		$this->text_property=$text_property;
 	} 
  
 	public function setFieldCategory($field_category){
@@ -187,16 +157,8 @@ class TextField
 		$this->field_label=$field_label;
 	} 
  
-	public function setNameFormat($name_format){
-		$this->name_format=$name_format;
-	} 
- 
 	public function setIsMandatory($is_mandatory){
 		$this->is_mandatory=$is_mandatory;
-	} 
- 
-	public function setDefaultValue($default_value){
-		$this->default_value=$default_value;
 	} 
  
 	public function setPageNum($page_no){
@@ -242,7 +204,7 @@ class TextField
 	public function setHeight($height){
 		$this->height=$height;
 	} 
- 
+  
 	public function constructJson()
 	{
 		$response["field_id"]=$this->field_id;
@@ -250,12 +212,9 @@ class TextField
 		$response["field_type_id"]=$this->field_type_id;
 		$response["field_type_name"]=$this->field_type_name;
 		$response["abs_height"]=$this->abs_height;
-		$response["text_property"]= isset( $this->text_property ) ?  $this->text_property->constructJson() : NULL;
 		$response["field_category"]=$this->field_category;
 		$response["field_label"]=$this->field_label;
-		$response["name_format"]=$this->name_format;
 		$response["is_mandatory"]=$this->is_mandatory;
-		$response["default_value"]=$this->default_value;
 		$response["page_no"]=$this->page_no;
 		$response["document_id"]=$this->document_id;
 		$response["field_name"]=$this->field_name;
@@ -267,7 +226,7 @@ class TextField
 		$response["description_tooltip"]=$this->description_tooltip;
 		$response["x_value"]=$this->x_value;
 		$response["height"]=$this->height;
-		return array_filter($response, function($v) { return !is_null($v); });
+		return array_filter( $response, function($v) { return !is_null($v); } );
 	}
 }
 ?>

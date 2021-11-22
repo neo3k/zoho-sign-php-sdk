@@ -1,8 +1,8 @@
 <?php
 
-namespace Vera\ZohoSign\api;
+namespace Vera\ZohoSign\Api;
 
-use Vera\ZohoSign\api\Fields;
+use Vera\ZohoSign\Api\Fields;
 
 class Actions
 { 

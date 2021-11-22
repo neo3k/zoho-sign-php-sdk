@@ -1,6 +1,6 @@
 <?php
 
-namespace Vera\ZohoSign\api\fields;
+namespace Vera\ZohoSign\Api\Fields;
 
 class RadioField
 { 

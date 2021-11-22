@@ -1,13 +1,13 @@
 <?php
 
-namespace Vera\ZohoSign\api;
+namespace Vera\ZohoSign\Api;
 
 
 use Vera\ZohoSign\SignException;
-use Vera\ZohoSign\api\Actions;
-use Vera\ZohoSign\api\Documents;
-use Vera\ZohoSign\api\PrefillField;
-use Vera\ZohoSign\api\TemplateDocumentFields;
+use Vera\ZohoSign\Api\Actions;
+use Vera\ZohoSign\Api\Documents;
+use Vera\ZohoSign\Api\PrefillField;
+use Vera\ZohoSign\Api\TemplateDocumentFields;
 
 
 class TemplateObject

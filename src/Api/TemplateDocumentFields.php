@@ -1,17 +1,17 @@
 <?php
 
-namespace Vera\ZohoSign\api;
+namespace Vera\ZohoSign\Api;
 
-use Vera\ZohoSign\api\fields\AttachmentField;
-use Vera\ZohoSign\api\fields\CheckBox;
-use Vera\ZohoSign\api\fields\DateField;
-use Vera\ZohoSign\api\fields\DropdownField;
-use Vera\ZohoSign\api\fields\DropdownValues;
-use Vera\ZohoSign\api\fields\ImageField;
-use Vera\ZohoSign\api\fields\RadioField;
-use Vera\ZohoSign\api\fields\RadioGroup;
-use Vera\ZohoSign\api\fields\TextField;
-use Vera\ZohoSign\api\fields\TextProperty;
+use Vera\ZohoSign\Api\Fields\AttachmentField;
+use Vera\ZohoSign\Api\Fields\CheckBox;
+use Vera\ZohoSign\Api\Fields\DateField;
+use Vera\ZohoSign\Api\Fields\DropdownField;
+use Vera\ZohoSign\Api\Fields\DropdownValues;
+use Vera\ZohoSign\Api\Fields\ImageField;
+use Vera\ZohoSign\Api\Fields\RadioField;
+use Vera\ZohoSign\Api\Fields\RadioGroup;
+use Vera\ZohoSign\Api\Fields\TextField;
+use Vera\ZohoSign\Api\Fields\TextProperty;
 
 
 class TemplateDocumentFields{
