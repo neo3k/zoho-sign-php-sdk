@@ -174,7 +174,7 @@ abstract class ZohoSign
         return $response;
     }
 
-    static function submitForSignature($requestObject)
+    static function submitForSignature($requestObject, $testing = false)
     {
 
         if (is_a($requestObject, "RequestObject")) {
@@ -197,7 +197,7 @@ abstract class ZohoSign
         $response = ApiClient::callSignAPI(
             "/api/v1/requests/$requestId/submit",        // api
             ApiClient::POST,                            // post
-            null,                                        // queryparams
+            $testing ? [ 'testing' => 'true'] : null,                                        // queryparams
             $payload                                    // post data
         );
 
