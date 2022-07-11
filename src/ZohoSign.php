@@ -318,12 +318,12 @@ abstract class ZohoSign
 
     }
 
-    static function generateEmbeddedSigningLink($request_id, $action_id, $host = null)
+    static function generateEmbeddedSigningLink($request_id, $action_id, $host = null, $testing = null)
     {
         $response = ApiClient::callSignAPI(
             "/api/v1/requests/$request_id/actions/$action_id/embedtoken" . (is_null($host) ? "" : "?host=$host"),    // api
             ApiClient::POST,
-            []
+            $testing ? [ 'testing' => 'true' ] : []
         );
 
         return $response->sign_url;
